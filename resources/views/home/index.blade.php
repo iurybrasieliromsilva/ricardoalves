@@ -81,21 +81,21 @@
                     <hr />
                     <div class="row d-flex justify-content-around">
                         <div class="col-md-5 shadow-lg p-3">
-                            {{ Form::open() }}
+                            {!! Form::open() !!}
                             <div class="form-group">
-                                {{ Form::label('name', 'Nome') }}
-                                {{ Form::text('name', null, ['class' => 'form-control']) }}
+                                {!! Form::label('name', 'Nome') !!}
+                                {!! Form::text('name', null, ['class' => 'form-control']) !!}
                             </div>
                             <div class="form-group">
-                                {{ Form::label('email', 'E-mail') }}
-                                {{ Form::text('email', null, ['class' => 'form-control']) }}
+                                {!! Form::label('email', 'E-mail') !!}
+                                {!! Form::text('email', null, ['class' => 'form-control']) !!}
                             </div>
                             <div class="form-group">
-                                {{ Form::label('message', 'Mensagem') }}
-                                {{ Form::textarea('message', null, ['class' => 'form-control', 'rows' => '4']) }}
+                                {!! Form::label('message', 'Mensagem') !!}
+                                {!! Form::textarea('message', null, ['class' => 'form-control', 'rows' => '4']) !!}
                             </div>
-                            {{ Form::submit('Enviar', ['class' => 'btn btn-primary']) }}
-                            {{ Form::close() }}
+                            {!! Form::submit('Enviar', ['class' => 'btn btn-primary']) !!}
+                            {!! Form::close() !!}
                         </div>
                     </div>
                 </div>
