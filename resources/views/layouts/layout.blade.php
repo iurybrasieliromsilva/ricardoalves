@@ -28,6 +28,7 @@
                     <li><a href="javascript:void(0);">Sobre-min</a></li>
                     <li><a href="javascript:void(0);">Contatos</a></li>
                     <li><a href="javascript:void(0);">Login</a></li>
+                    <li><a href="javascript:void(0);">Registrar</a></li>
                 </ul>
             </div>
         </nav>
