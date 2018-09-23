@@ -132,7 +132,7 @@ nav ul li a:hover{
     }
 
     .nav-wrapper ul li:nth-child(7) a{
-        transition-delay: 0.10s;
+        transition-delay: 0.12s;
     }
 
     .nav-wrapper ul li:not(:first-child){
