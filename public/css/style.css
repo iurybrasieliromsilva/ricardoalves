@@ -1,6 +1,7 @@
 body{
     font-family: 'Montserrat', sans-serif;
     font-weight: lighter;
+    padding-top: 70px;
 }
 
 textarea{
@@ -132,7 +133,7 @@ nav ul li a:hover{
     }
 
     .nav-wrapper ul li:nth-child(7) a{
-        transition-delay: 0.12s;
+        transition-delay: 1s;
     }
 
     .nav-wrapper ul li:not(:first-child){

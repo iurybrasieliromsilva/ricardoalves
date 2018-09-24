@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Photo;
 
 class PhotoController extends Controller
 {
@@ -13,7 +14,7 @@ class PhotoController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -45,7 +46,7 @@ class PhotoController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('photo.show');
     }
 
     /**

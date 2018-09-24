@@ -108,9 +108,15 @@
                     <h1>Siga-me nas redes sociais</h1>
                 </div>
                 <div class="col-lg-12">
-                    <i class="fab fa-facebook fa-5x p-4"></i>
-                    <i class="fab fa-twitter-square fa-5x p-4"></i>
-                    <i class="fab fa-instagram fa-5x p-4"></i>
+                    <a href="http://facebook.com/profile.php?id=100003652417842" class="text-dark" target="_blanck">
+                        <i class="fab fa-facebook fa-5x p-4"></i>
+                    </a>
+                    <a href="http://twitter.com.br" class="text-dark" target="_blanck">
+                        <i class="fab fa-twitter-square fa-5x p-4"></i>
+                    </a>
+                    <a href="http://instagram.com/ricardo.fotografia" class="text-dark" target="_blanck">
+                        <i class="fab fa-instagram fa-5x p-4"></i>
+                    </a>
                 </div>
             </div>
         </section>
