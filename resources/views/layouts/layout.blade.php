@@ -23,12 +23,12 @@
             <div class="nav-wrapper">
                 <ul>
                     <li><a href="javascript:void(0);">Home</a></li>
-                    <li><a href="javascript:void(0);">Fotos</a></li>
+                    <li><a href="{{ route('photo.index') }}">Fotos</a></li>
                     <li><a href="javascript:void(0);">Videos</a></li>
                     <li><a href="javascript:void(0);">Sobre-min</a></li>
                     <li><a href="javascript:void(0);">Contatos</a></li>
                     <li><a href="javascript:void(0);">Login</a></li>
-                    <li><a href="javascript:void(0);">Registrar</a></li>
+                    <li><a href="{{ route('auth.register') }}">Registrar</a></li>
                 </ul>
             </div>
         </nav>
