@@ -13,8 +13,8 @@
                 {{ Form::open(['route' => 'auth.create', 'files' => true]) }}
                     {{ csrf_field() }}
                     <div class="form-group">
-                        {{ Form::label('name', 'Nome') }}
-                        {{ Form::text('name', '', ['class' => 'form-control']) }}
+                        <label for="name"></label>
+                        <input type="text" name="name" id="name" class="form-control">
                         @if ($errors->first('name'))
                             <p class="text-danger">
                                 {{ $errors->first('name') }}
