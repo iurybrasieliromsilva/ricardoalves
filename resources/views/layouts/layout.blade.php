@@ -18,21 +18,35 @@
                 <i></i>
             </label>
             <div class="logo">
-                <a href="javascript:void(0);">Ricardo Alves</a>
+                <a href="{{ route('home') }}">Ricardo Alves</a>
             </div>
             <div class="nav-wrapper">
                 <ul>
-                    <li><a href="javascript:void(0);">Home</a></li>
+                    <li><a href="{{ route('home') }}">Home</a></li>
                     <li><a href="{{ route('photo.index') }}">Fotos</a></li>
                     <li><a href="javascript:void(0);">Videos</a></li>
                     <li><a href="javascript:void(0);">Sobre-min</a></li>
                     <li><a href="javascript:void(0);">Contatos</a></li>
-                    <li><a href="javascript:void(0);">Login</a></li>
-                    <li><a href="{{ route('auth.register') }}">Registrar</a></li>
+                    @if ( \Auth::check() )
+                        <li>
+                            <div class="dropdown">
+                                <a class="dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{ Auth::user()->name }}
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="javascript:void(0);">Dashboard</a>
+                                    <a class="dropdown-item" href="{{ route('auth.logout') }}">Sair</a>
+                                </div>
+                            </div>
+                        </li>
+                    @else
+                        <li><a href="{{ route('auth.login') }}">Login</a></li>
+                        <li><a href="{{ route('auth.register') }}">Registrar</a></li>
+                    @endif
                 </ul>
             </div>
         </nav>
-
+        
         @yield('content')
 
         <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>

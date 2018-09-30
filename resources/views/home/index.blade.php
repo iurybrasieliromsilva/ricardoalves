@@ -18,30 +18,32 @@
             </div>
             <hr />
             <div class="row">
-                @for($i = 0; $i <= 6; $i++)
-                <div class="col-md-4 p-2">
-                    <div class="card">
-                        <img class="card-img-top" src="http://www.mediotejo.net/wp-content/uploads/2017/01/fotografia-DR.jpg" alt="">
-                        <div class="card-body text-right">
-                            <h3 class="card-title">Retratos</h3>
-                            <blockquote class="blockquote">
-                                <p class="mb-0">
-                                        Lorem, ipsum dolor sit amet consectetur earum voluptates animi maxime dolores distinctio molestias atque laboriosam.
-                                </p>
-                                <footer class="blockquote-footer">
-                                    Ricardo Alves
-                                </footer>
-                            </blockquote>
-                        </div>
-                        <div class="card-footer text-right">
-                            <a href="" class="card-link">
-                                Comentarios
-                                <span class="badge badge-info">4</span>
-                            </a>
+                @forelse ($photos as $photo)
+                    <div class="col-md-4 p-2">
+                        <div class="card">
+                            <img class="card-img-top" src="{{ asset('storage/images/'.$photo->name) }}" alt="">
+                            <div class="card-body text-right">
+                                <h3 class="card-title">{{ $photo->title }}</h3>
+                                <blockquote class="blockquote">
+                                    <p class="mb-0">
+                                            {{ $photo->description }}
+                                    </p>
+                                    <footer class="blockquote-footer">
+                                        {{ $photo->author }}
+                                    </footer>
+                                </blockquote>
+                            </div>
+                            <div class="card-footer text-right">
+                                <a href="" class="card-link">
+                                    Comentarios
+                                    <span class="badge badge-info"></span>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                @endfor
+                @empty
+                    
+                @endforelse
             </div>
         </section>
 

@@ -15,6 +15,6 @@ class Photo extends Model
 
     public function comments()
     {
-        return $tis->hasMany('App\Models\Comment');
+        return $this->hasMany('App\Models\Comment');
     }
 }

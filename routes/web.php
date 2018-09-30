@@ -1,6 +1,6 @@
 <?php
 
-Route::get('/', 'HomeController');
+Route::get('/', 'HomeController')->name('home');
 
 Route::resources([
     'photo'     => 'PhotoController',
@@ -9,6 +9,11 @@ Route::resources([
 ]);
 
 Route::prefix('auth')->group(function (){
+    Route::get('/login', 'AuthController@login')->name('auth.login');
+    Route::post('/authenticate', 'AuthController@authenticate')->name('auth.authenticate');
+
+    Route::get('/logout', 'AuthController@logout')->name('auth.logout');
+
     Route::get('/register', 'AuthController@register')->name('auth.register');
     Route::post('/create', 'AuthController@create')->name('auth.create');
 });

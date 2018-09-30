@@ -151,6 +151,10 @@ nav ul li a:hover{
         transform: translateY(-20px);
         transition: all 0.2s ease;
     }
+    
+    .nav-wrapper ul li a:hover{
+        color: white;
+    }
 
     .nav-btn{
         position: fixed;

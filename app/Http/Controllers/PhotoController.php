@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Photo;
+use App\Http\Requests\PhotoRequest;
 
 class PhotoController extends Controller
 {
@@ -15,7 +16,7 @@ class PhotoController extends Controller
     public function index()
     {
         return view('photo.index', [
-            'photos' => Photo::all()
+            'photos' => Photo::withCount('comments')->get()
         ]);
     }
 
@@ -26,7 +27,8 @@ class PhotoController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('create', Photo::class);
+        return view('photo.create');
     }
 
     /**
@@ -35,9 +37,39 @@ class PhotoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PhotoRequest $request)
     {
-        //
+        $this->authorize('store', Photo::class);
+
+        $name = uniqid(date('HisYmd'));
+        
+        $extension = $request->file('image')->extension();
+        
+        $nameFile = "{$name}.{$extension}";
+
+        $upload = $request->file('image')->storeAs('images', $nameFile);
+
+        if(!$upload){
+            return redirect()
+                ->back()
+                ->with('error', 'Falha ao salvar imagem.')
+                ->withInput();
+        }
+        
+        $photo = Photo::create([
+            'name'          => $nameFile,
+            'title'         => $request->title,
+            'description'   => $request->description,
+            'author'        => $request->author,
+        ]);
+
+        if( !$photo ){
+            return redirect()
+                ->back()
+                ->withInput();
+        }
+
+        return redirect()->route('photo.index');
     }
 
     /**
@@ -48,7 +80,9 @@ class PhotoController extends Controller
      */
     public function show($id)
     {
-        return view('photo.show');
+        return view('photo.show', [
+            'photo' => Photo::findOrFail($id)
+        ]);
     }
 
     /**
@@ -59,7 +93,7 @@ class PhotoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $this->authorize('edit', Photo::class);
     }
 
     /**
@@ -71,7 +105,7 @@ class PhotoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->authorize('update', Photo::class);
     }
 
     /**
@@ -82,6 +116,6 @@ class PhotoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->authorize('destroy', Photo::class);
     }
 }

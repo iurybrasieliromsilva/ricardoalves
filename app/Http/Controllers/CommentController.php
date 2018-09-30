@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Comment;
 
 class CommentController extends Controller
 {
@@ -34,7 +35,17 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $comment = Comment::create([
+            'comment' => $request->comment,
+            'user_id' => $request->user_id,
+            'photo_id' => $request->photo_id,
+        ]);
+
+        if( !$comment ){
+            return redirect()->route('home');
+        }
+
+        return redirect()->back();
     }
 
     /**
@@ -79,6 +90,14 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->authorize('destroy', Comment::class);
+
+        $comment = Comment::findOrFail($id);
+        if( $comment->delete() ){
+            return redirect()->back();
+        }
+
+        return redirect()->back();
+
     }
 }

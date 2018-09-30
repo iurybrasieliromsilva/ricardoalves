@@ -4,9 +4,35 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
+use Illuminate\Support\Facades\Storage;
+use App\Models\User;
 
 class AuthController extends Controller
 {
+    public function login()
+    {
+        return view('auth.login');
+    }
+
+    public function authenticate(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+        
+        if( \Auth::attempt($credentials) )
+        {
+            return redirect()->route('home');
+        }
+
+        return redirect()->back()->with('error', 'Credenciais incorretas.');
+    }
+
+    public function logout()
+    {
+        \Auth::logout();
+        
+        return redirect()->route('home');
+    }
+
     public function register()
     {
         return view('auth.register');
@@ -14,16 +40,35 @@ class AuthController extends Controller
 
     public function create(UserRequest $request)
     {
-        if($request->hasFile('photo_profile')){
-            $image      = $request->file('photo_profile');
-            $fileName   = time() . '.' . $image->getClientOriginalExtension();
+        
+        $name = uniqid(date('HisYmd'));
+        
+        $extension = $request->file('photo_profile')->extension();
+        
+        $nameFile = "{$name}.{$extension}";
 
-            $img = \Image::make($image->getRealPath());
+        $upload = $request->file('photo_profile')->storeAs('images', $nameFile);
 
-            $img->stream();
-
-            Storage::disk('local')->put('images'.'/'.$fileName, $img, 'public');
+        if(!$upload){
+            return redirect()
+                ->back()
+                ->with('error', 'Falha ao salvar imagem.')
+                ->withInput();
         }
-        return redirect()->route('auth.register');
+        
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'photo_profile' => $nameFile,
+        ]);
+
+        if( !$user ){
+            return redirect()
+                ->back()
+                ->withInput();
+        }
+
+        return redirect()->route('auth.login');
     }
 }

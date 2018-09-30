@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'photo_profile',
+        'comment',
+        'user_id',
+        'photo_id',
+        'video_id',
     ];
 
     public function user()
